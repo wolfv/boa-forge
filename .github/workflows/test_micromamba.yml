@@ -25,7 +25,7 @@ jobs:
       - name: make python env
         shell: bash -l -eo pipefail {0}
         run: |
-          micromamba create -n py38 python=3.8 wheel -c conda-forge -vv
+          micromamba create -n py38 python=3.8 wheel -c conda-forge -vvv
           micromamba activate py38
           python --version
           wheel --help
