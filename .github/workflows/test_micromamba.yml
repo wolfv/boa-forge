@@ -20,6 +20,7 @@ jobs:
           URL=`curl --silent "https://api.github.com/repos/mamba-org/boa-forge/releases/latest" | jq -r '.assets[] | select(.name == "micromamba-osx-64").browser_download_url'`
           echo "DOWNLOADING $URL"
           curl -L $URL -o micromamba
+          chmod u+x ./micromamba
           ./micromamba shell init -s bash -p ~/microenv
       - name: make python env
         shell: bash -l -eo pipefail {0}
