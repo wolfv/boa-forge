@@ -47,7 +47,7 @@ jobs:
         run: |
           ls -al
           echo $(pwd)
-          for TEST_IMAGE_NAME in "ubuntu:20.04" "ubuntu:19.10" "ubuntu:16.04" "ubuntu:18.04" "centos:7" "debian:buster" "fedora:33"; do
+          for TEST_IMAGE_NAME in "ubuntu:20.04" "ubuntu:19.10" "ubuntu:16.04" "ubuntu:18.04" "centos:7" "centos:6" "debian:buster" "fedora:33"; do
             echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
             export DOCKER_ARCH="amd64"
             docker run --rm -v "$(pwd):/construct" \
