@@ -60,7 +60,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: get micromamba release
-        shell: powershell
+        shell: bash
         run: |
           URL=`curl --silent "https://api.github.com/repos/mamba-org/boa-forge/releases/latest" | jq -r '.assets[] | select(.name == "micromamba-win-64.exe").browser_download_url'`
           echo "DOWNLOADING $URL"
