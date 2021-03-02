@@ -29,27 +29,43 @@ jobs:
   #         micromamba activate py38
   #         python --version
   #         wheel --help
-  test_linux:
+  # test_linux:
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - name: get micromamba release
+  #       shell: bash -l -eo pipefail {0}
+  #       run: |
+  #         URL=`curl --silent "https://api.github.com/repos/mamba-org/boa-forge/releases/latest" | jq -r '.assets[] | select(.name == "micromamba-linux-64").browser_download_url'`
+  #         echo "DOWNLOADING $URL"
+  #         curl -L $URL -o micromamba
+  #         chmod u+x ./micromamba
+  #     - name: run micromamba
+  #       shell: bash -l -eo pipefail {0}
+  #       run: |
+  #         ls -al
+  #         echo $(pwd)
+  #         for TEST_IMAGE_NAME in "ubuntu:20.04" "ubuntu:19.10" "ubuntu:16.04" "ubuntu:18.04" "centos:7" "centos:6" "debian:buster" "fedora:33" "archlinux:latest"; do
+  #           echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
+  #           export DOCKER_ARCH="amd64"
+  #           docker run --rm -v "$(pwd):/construct" \
+  #             "${DOCKER_ARCH}/${TEST_IMAGE_NAME}" sh -c "/construct/micromamba create -p /testenv xtensor -c conda-forge -v"
+  #         done
+  test_win:
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [win-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: get micromamba release
-        shell: bash -l -eo pipefail {0}
+        shell: powershell
         run: |
-          URL=`curl --silent "https://api.github.com/repos/mamba-org/boa-forge/releases/latest" | jq -r '.assets[] | select(.name == "micromamba-linux-64").browser_download_url'`
+          URL=`curl --silent "https://api.github.com/repos/mamba-org/boa-forge/releases/latest" | jq -r '.assets[] | select(.name == "micromamba-win-64.exe").browser_download_url'`
           echo "DOWNLOADING $URL"
-          curl -L $URL -o micromamba
-          chmod u+x ./micromamba
+          curl -L $URL -o micromamba.exe
       - name: run micromamba
-        shell: bash -l -eo pipefail {0}
+        shell: powershell
         run: |
-          ls -al
-          echo $(pwd)
-          for TEST_IMAGE_NAME in "ubuntu:20.04" "ubuntu:19.10" "ubuntu:16.04" "ubuntu:18.04" "centos:7" "centos:6" "debian:buster" "fedora:33"; do
-            echo "============= Test installer on ${TEST_IMAGE_NAME} ============="
-            export DOCKER_ARCH="amd64"
-            docker run --rm -v "$(pwd):/construct" \
-              "${DOCKER_ARCH}/${TEST_IMAGE_NAME}" sh -c "/construct/micromamba create -p /testenv xtensor -c conda-forge -v"
-          done
+          ./micromamba.exe create -n test xtensor -c conda-forge
