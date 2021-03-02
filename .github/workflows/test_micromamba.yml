@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-10.13, macos-10.15, macos-11.0]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: get micromamba release
         shell: bash -l -eo pipefail {0}
