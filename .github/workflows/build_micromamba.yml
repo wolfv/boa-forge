@@ -48,6 +48,7 @@ jobs:
       - name: build bzip2
         shell: bash -l -eo pipefail {0}
         run: |
+          echo "SYSROOT: ${CONDA_BUILD_SYSROOT}"
           boa build bzip2 --features [static] --skip-existing --target-platform $TARGET_PLATFORM
       - name: build libiconv
         shell: bash -l -eo pipefail {0}
