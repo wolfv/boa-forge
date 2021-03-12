@@ -43,7 +43,7 @@ jobs:
             - conda-forge
           EOL
 
-          pip install git+https://github.com/wolfv/boa@more_known_vars
+          pip install git+https://github.com/mamba-org/boa@master
       - name: build bzip2
         shell: bash -l -eo pipefail {0}
         run: |
