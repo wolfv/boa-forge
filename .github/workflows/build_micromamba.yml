@@ -36,7 +36,7 @@ jobs:
             ~/micromamba/envs/buildenv/conda-bld/**/*tar.bz2
           key: build-cache-${{ runner.os }}
       - name: create .condarc
-        shell: bash
+        shell: bash -l -eo pipefail {0}
         run: |
           cat > ~/.condarc <<EOL
           channels:
