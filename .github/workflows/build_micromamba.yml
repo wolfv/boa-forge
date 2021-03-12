@@ -27,31 +27,31 @@ jobs:
       TARGET_PLATFORM: ${{ matrix.target_platform }}
     steps:
       - uses: actions/checkout@v2
-      # - name: install mamba
-      #   uses: mamba-org/provision-with-micromamba@main
-      # - name: Cache build outputs
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: |
-      #       ~/micromamba/envs/buildenv/conda-bld/**/*tar.bz2
-      #     key: build-cache-${{ runner.os }}
-      # - name: create .condarc
-      #   shell: bash
-      #   run: |
-      #     cat > ~/.condarc <<EOL
-      #     channels:
-      #       - conda-forge
-      #     EOL
+      - name: install mamba
+        uses: mamba-org/provision-with-micromamba@main
+      - name: Cache build outputs
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/micromamba/envs/buildenv/conda-bld/**/*tar.bz2
+          key: build-cache-${{ runner.os }}
+      - name: create .condarc
+        shell: bash
+        run: |
+          cat > ~/.condarc <<EOL
+          channels:
+            - conda-forge
+          EOL
       - name: build bzip2
         shell: bash -l -eo pipefail {0}
         run: |
-          ls /Applications
-          ls /Applications/Xcode_12.2.app
-          ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk
-          ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
-          ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/
-          ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/
-          ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/
+          # ls /Applications
+          # ls /Applications/Xcode_12.2.app
+          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk
+          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
+          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/
+          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/
+          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/
           boa build bzip2 --features [static] --skip-existing --target-platform $TARGET_PLATFORM
       - name: build libiconv
         shell: bash -l -eo pipefail {0}
