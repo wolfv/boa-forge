@@ -6,7 +6,6 @@ cp $BUILD_PREFIX/share/libtool/build-aux/config.* .
 # need macosx-version-min flags set in cflags and not cppflags
 export CFLAGS="$CFLAGS $CPPFLAGS"
 
-
 if [[ "${FEATURE_STATIC}" == "1" ]]; then
     BUILD_TYPE="--enable-static --disable-shared"
 else
