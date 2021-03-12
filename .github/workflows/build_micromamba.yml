@@ -25,6 +25,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       TARGET_PLATFORM: ${{ matrix.target_platform }}
+      CONDA_BUILD_SYSROOT: /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk
     steps:
       - uses: actions/checkout@v2
       - name: install mamba
@@ -47,13 +48,6 @@ jobs:
       - name: build bzip2
         shell: bash -l -eo pipefail {0}
         run: |
-          # ls /Applications
-          # ls /Applications/Xcode_12.2.app
-          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk
-          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
-          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/
-          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/
-          # ls /Applications/Xcode_12.2.app/Contents/Developer/Platforms/
           boa build bzip2 --features [static] --skip-existing --target-platform $TARGET_PLATFORM
       - name: build libiconv
         shell: bash -l -eo pipefail {0}
