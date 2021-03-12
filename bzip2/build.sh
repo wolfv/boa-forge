@@ -1,11 +1,6 @@
 #!/bin/sh
 set -ex
 
-sleep 2
-
-
-echo "SYSROOT ${CONDA_BUILD_SYSROOT}"
-
 # toolchain flags + bzip flags + fpic
 export CFLAGS="${CFLAGS} -Wall -Winline -O2 -g -D_FILE_OFFSET_BITS=64 -fPIC"
 USED_CC=${GCC:-${CC}}
