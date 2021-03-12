@@ -25,6 +25,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       TARGET_PLATFORM: ${{ matrix.target_platform }}
+      CONDA_BUILD_SYSROOT: /Applications/Xcode_12.2.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk
     steps:
       - uses: actions/checkout@v2
       - name: install mamba
